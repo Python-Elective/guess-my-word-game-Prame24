@@ -49,14 +49,20 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
+    
+    for n in secret_word:
+      if n != letters_guessed:
+        return False
+      else:
+        return True
+    
     # FILL IN YOUR CODE HERE...
-    pass
 
 
 ### Testcases
-# print(is_word_guessed('apple', ['a', 'e', 'i', 'k', 'p', 'r', 's']))
-# print(is_word_guessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u']))
-# print(is_word_guessed('pineapple', []))
+print(is_word_guessed('apple', ['a', 'e', 'i', 'k', 'p', 'r', 's']))
+print(is_word_guessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u']))
+print(is_word_guessed('pineapple', ['p', 'i', 'n', 'e', 'a', 'p', 'l']))
 
 
 
