@@ -78,12 +78,11 @@ def get_guessed_word(secret_word, letters_guessed):
     
     output_string = ''
     for c in secret_word:
-      if c in letters_guessed:
-        output_string += c
-      else:
-        output_string += '_ '
+       if c in letters_guessed:
+         output_string += c
+       else:
+         output_string += '_ '
     return output_string
-    
     
     
       
@@ -99,13 +98,33 @@ def get_available_letters(letters_guessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...   
-    pass
+    # FILL IN YOUR CODE HERE...
+    # alphabet = string.ascii_lowercase
+    
+    # for c in letters_guessed:
+    #   alphabet = alphabet.replace(c,'')
+      
+    # return alphabet
 
-
+    alphabet = list(string.ascii_lowercase)
+    
+    # for c in letters_guessed:
+    #   if c in letters_guessed:
+    #     alphabet.remove(c)
+        
+    # return ' '.join([c for c in alphabet if c not in letters_guessed])
+    
+    output_string = ''
+    for c in alphabet:
+      if c not in letters_guessed:
+        output_string = output_string + c + ' '
+    return output_string
 
 #Testcases 
-# print( get_available_letters(['e', 'i', 'k', 'p', 'r', 's']) )
+print( get_available_letters(['e', 'i', 'k', 'p', 'r', 's']) )
+print( get_available_letters([]))
+print( get_available_letters(['r', 'y', 'd', 'u', 't']))
+print( get_available_letters(['p', 'r', 'f', 'd', 'k', 'h', 'c', 'a', 'i', 'y', 'w', 'b']))
   
 def game_loop(secret_word):
     '''
