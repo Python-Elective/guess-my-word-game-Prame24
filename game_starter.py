@@ -147,14 +147,30 @@ def game_loop(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     # FILL IN YOUR CODE HERE...
-    pass
-
+    guess_attempt = 8
+    letters_guessed = ''
+    
+    print('let the game begin!')
+    print(f'I am thinking of a word with {len(secret_word)} letters \n')
+    print(f'you have {guess_attempt} guesses remaining')
+    print(f'Letters available: {get_available_letters(letters_guessed)}')
+    
+    while guess_attempt > 0:
+      print(input('guess a letter: '))
+      letters_guessed = input()
+      print(letters_guessed)
+      
+      if is_word_guessed(secret_word ,letters_guessed) == True:
+        print(f'correct: {get_guessed_word(secret_word ,letters_guessed)}')
+      else:
+        print(f'You fool you tried this already!: {get_guessed_word(secret_word ,letters_guessed)}')
+    
 
 
 
 def main():
     secret_word = choose_word(word_list)
-    game_loop(secret_word)
+    game_loop('apple')
 
 # Testcases
 # you might want to pick your own
