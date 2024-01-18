@@ -60,10 +60,10 @@ def is_word_guessed(secret_word, letters_guessed):
 
 
 ### Testcases
-print(is_word_guessed('apple', ['a', 'e', 'i', 'k', 'p', 'r', 's'])) # output = False
-print(is_word_guessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u'])) #output = False
-print(is_word_guessed('pineapple', ['p', 'i', 'n','e','a', 'l'])) #output = True
-print(is_word_guessed ('carrot', ['b', 'g', 'd', 'z', 'w', 'y', 'v', 'm', 'i', 'k'])) #output = False
+# print(is_word_guessed('apple', ['a', 'e', 'i', 'k', 'p', 'r', 's'])) # output = False
+# print(is_word_guessed('durian', ['h', 'a', 'c', 'd', 'i', 'm', 'n', 'r', 't', 'u'])) #output = False
+# print(is_word_guessed('pineapple', ['p', 'i', 'n','e','a', 'l'])) #output = True
+# print(is_word_guessed ('carrot', ['b', 'g', 'd', 'z', 'w', 'y', 'v', 'm', 'i', 'k'])) #output = False
 
 
 
@@ -87,9 +87,9 @@ def get_guessed_word(secret_word, letters_guessed):
     
       
 #Testcases
-print(get_guessed_word('apple', ['e', 'i', 'k', 'p', 'r', 's']))
-print(get_guessed_word('durian', ['a', 'c', 'd', 'h', 'i', 'm', 'n', 'r', 't', 'u']))
-print(get_guessed_word('durian', []))
+# print(get_guessed_word('apple', ['e', 'i', 'k', 'p', 'r', 's']))
+# print(get_guessed_word('durian', ['a', 'c', 'd', 'h', 'i', 'm', 'n', 'r', 't', 'u']))
+# print(get_guessed_word('durian', []))
 
 
 def get_available_letters(letters_guessed):
@@ -121,10 +121,10 @@ def get_available_letters(letters_guessed):
     return output_string
 
 #Testcases 
-print( get_available_letters(['e', 'i', 'k', 'p', 'r', 's']) )
-print( get_available_letters([]))
-print( get_available_letters(['r', 'y', 'd', 'u', 't']))
-print( get_available_letters(['p', 'r', 'f', 'd', 'k', 'h', 'c', 'a', 'i', 'y', 'w', 'b']))
+# print( get_available_letters(['e', 'i', 'k', 'p', 'r', 's']) )
+# print( get_available_letters([]))
+# print( get_available_letters(['r', 'y', 'd', 'u', 't']))
+# print( get_available_letters(['p', 'r', 'f', 'd', 'k', 'h', 'c', 'a', 'i', 'y', 'w', 'b']))
   
 def game_loop(secret_word):
     '''
@@ -147,30 +147,33 @@ def game_loop(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     # FILL IN YOUR CODE HERE...
-    guess_attempt = 8
+    guess_attempt = len(secret_word) + 5
     letters_guessed = ''
     
     print('let the game begin!')
-    print(f'I am thinking of a word with {len(secret_word)} letters \n')
-    print(f'you have {guess_attempt} guesses remaining')
-    print(f'Letters available: {get_available_letters(letters_guessed)}')
+    print(f'I am thinking of a word with {len(secret_word)} letters')
     
     while guess_attempt > 0:
-      print(input('guess a letter: '))
-      letters_guessed = input()
-      print(letters_guessed)
+      print(f'you have {guess_attempt} guesses remaining')
+      print(f'Letters available: {get_available_letters(letters_guessed)}')
+      letters_guessed += input('guess a letter: ')
       
       if is_word_guessed(secret_word ,letters_guessed) == True:
         print(f'correct: {get_guessed_word(secret_word ,letters_guessed)}')
       else:
-        print(f'You fool you tried this already!: {get_guessed_word(secret_word ,letters_guessed)}')
-    
+        print(f'incorrect!: {get_guessed_word(secret_word ,letters_guessed)}')
+      guess_attempt -= 1
+      
+    if is_word_guessed(secret_word, letters_guessed) == True:
+      print('YOU WIN')
+    else:
+      print('FAIL')
 
 
 
 def main():
     secret_word = choose_word(word_list)
-    game_loop('apple')
+    game_loop(secret_word)
 
 # Testcases
 # you might want to pick your own
