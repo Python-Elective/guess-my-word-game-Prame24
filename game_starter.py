@@ -150,40 +150,38 @@ def game_loop(secret_word):
     guess_attempt = 8
     letters_guessed = []
     guess = ''
+    guessInLower = ''
     
     print('let the game begin!')
     print(f'I am thinking of a word with {len(secret_word)} letters')
     
-    while guess_attempt > 0:
+    while guess_attempt > 0 and '_ ' in get_guessed_word(secret_word, letters_guessed):
       print(f'you have {guess_attempt} guesses remaining')
       print(f'Letters available: {get_available_letters(letters_guessed)}')
       guess = input('guess a letter: ')
+      guessInLower = guess.lower()
       
-      if guess in letters_guessed:
-        print(f'YOU FOOL, you already guess this: {get_guessed_word(secret_word, letters_guessed)}\n')
-      elif guess in secret_word:
-        letters_guessed.append(guess)
+      if guessInLower in letters_guessed:
+        print(f'YOU FOOL, you already guessed this: {get_guessed_word(secret_word, letters_guessed)}\n')
+      elif guessInLower in secret_word:
+        letters_guessed.append(guessInLower)
         print(f'correct: {get_guessed_word(secret_word ,letters_guessed)}\n')
       else:
         print(f'incorrect!: {get_guessed_word(secret_word ,letters_guessed)}\n')
-        letters_guessed.append(guess)
+        letters_guessed.append(guessInLower)
         guess_attempt -= 1
         
-      if '_ ' not in get_guessed_word(secret_word, letters_guessed):
-        break
         
-      
-      
-    if is_word_guessed(secret_word, letters_guessed) == True:
-      print('YOU WIN')
+    if is_word_guessed(secret_word, letters_guessed) == False:
+      return print(f'YOU LOSE, secret word is: {secret_word}')
     else:
-      print(f'YOU LOSE, secret word is: {secret_word}')
+      return print(f'YOU WIN!')
 
 
 
 def main():
     secret_word = choose_word(word_list)
-    game_loop('apple')
+    game_loop(secret_word)
 
 # Testcases
 # you might want to pick your own
